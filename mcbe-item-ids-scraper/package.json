@@ -1,0 +1,30 @@
+{
+    "name": "mcbe-item-ids-scraper",
+    "version": "1.0.0",
+    "description": "MCBE Item IDs Scraper",
+    "main": "dist/index.js",
+    "bin": {
+        "mcbe-item-ids-scraper": "dist/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/JohnScience/mcbe-item-ids-scraper"
+    },
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "dev": "ts-node src/index.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^25.0.9",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.7.2"
+    },
+    "dependencies": {
+        "cheerio": "^1.1.2",
+        "commander": "^14.0.2"
+    }
+}
