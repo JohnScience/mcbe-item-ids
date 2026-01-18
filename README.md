@@ -83,9 +83,38 @@ npm install mcbe-item-ids
 
 For development,
 
-1. **Scrape** item IDs from Microsoft docs using `mcbe-item-ids-scraper`
-2. **Generate** the package using `mcbe-item-ids-packgen` (fetches latest scraped data)
-3. **Use** the generated `mcbe-item-ids` package in your projects
+```bash
+# Run full development workflow (scrape, generate, test)
+cd mcbe-item-ids-packgen
+npm install
+npm run dev:fresh
+
+# Publish (build runs automatically via prepublishOnly)
+cd ../mcbe-item-ids
+npm publish
+```
+
+Or manually step-by-step:
+
+```bash
+# 1. Scrape item IDs from Microsoft documentation
+cd mcbe-item-ids-scraper
+npm install
+npm run scrape:latest
+
+# 2. Generate the mcbe-item-ids package
+cd ../mcbe-item-ids-packgen
+npm install
+npm run dev:local
+
+# 3. Test the generated package
+cd ../mcbe-item-ids
+npm install
+npm test
+
+# 4. Publish (build runs automatically via prepublishOnly)
+npm publish
+```
 
 ## Repository Structure
 

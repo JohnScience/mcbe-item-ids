@@ -5,7 +5,66 @@ A TypeScript library template for creating MCBE Item IDs package.
 ## Installation
 
 ```bash
-npm install
+npm install mcbe-item-ids
+```
+
+## Usage
+
+```typescript
+import { itemIds } from 'mcbe-item-ids';
+
+// Access all item IDs (object mapping item names to numeric IDs)
+console.log(itemIds);
+// Output: { acacia_boat: 382, acacia_button: -140, ... }
+
+// Get numeric ID for a specific item
+const appleId = itemIds.apple;
+console.log(appleId); // 287
+
+// Check if a specific item exists
+const hasApple = 'apple' in itemIds;
+console.log(hasApple); // true
+
+// Get all item names
+const allItemNames = Object.keys(itemIds);
+console.log(allItemNames);
+// Output: ['acacia_boat', 'acacia_button', ...]
+
+// Filter items by prefix
+const acaciaItems = Object.keys(itemIds).filter(name => name.startsWith('acacia_'));
+console.log(acaciaItems);
+// Output: ['acacia_boat', 'acacia_button', ...]
+
+// Get total count of items
+console.log(`Total items: ${Object.keys(itemIds).length}`);
+```
+
+### Testing
+
+```typescript
+import { itemIds } from 'mcbe-item-ids';
+
+test('itemIds should be an object', () => {
+  expect(typeof itemIds).toBe('object');
+  expect(itemIds).not.toBeNull();
+});
+
+test('itemIds should contain expected items', () => {
+  expect('apple' in itemIds).toBe(true);
+  expect('diamond' in itemIds).toBe(true);
+  expect('iron_sword' in itemIds).toBe(true);
+});
+
+test('all item IDs should be numbers', () => {
+  const values = Object.values(itemIds);
+  values.forEach((value) => {
+    expect(typeof value).toBe('number');
+  });
+});
+
+test('itemIds should have reasonable length', () => {
+  expect(Object.keys(itemIds).length).toBeGreaterThan(0);
+});
 ```
 
 ## Build

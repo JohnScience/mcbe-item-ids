@@ -2,6 +2,8 @@
 
 import { readFile, writeFile, mkdir, copyFile, readdir, stat } from "fs/promises";
 import { join, dirname, relative } from "path";
+import { Command } from "commander";
+import packageJson from "../package.json";
 
 async function fetchItemIdsJson(): Promise<string> {
     const response = await fetch('https://raw.githubusercontent.com/JohnScience/mcbe-item-ids/refs/heads/main/mcbe-item-ids-scraper/output/latest.json');
@@ -9,6 +11,16 @@ async function fetchItemIdsJson(): Promise<string> {
         throw new Error(`Failed to fetch item IDs JSON: ${response.statusText}`);
     }
     return await response.text();
+}
+
+async function loadItemIdsJson(inputPath?: string): Promise<string> {
+    if (inputPath) {
+        console.log(`Loading item IDs from local file: ${inputPath}`);
+        return await readFile(inputPath, 'utf-8');
+    } else {
+        console.log('Fetching item IDs from GitHub...');
+        return await fetchItemIdsJson();
+    }
 }
 
 async function getAllFiles(dir: string, baseDir: string = dir): Promise<string[]> {
@@ -69,11 +81,10 @@ async function copyTemplateFile(
     }
 }
 
-async function createPackage(outputDir: string): Promise<void> {
+async function createPackage(outputDir: string, inputPath?: string): Promise<void> {
     const templateDir = join(__dirname, '..', '..', 'mcbe-item-ids-package-template');
 
-    console.log('Fetching item IDs...');
-    const itemIdsJson = await fetchItemIdsJson();
+    const itemIdsJson = await loadItemIdsJson(inputPath);
 
     console.log('Creating package structure...');
 
@@ -98,9 +109,20 @@ async function createPackage(outputDir: string): Promise<void> {
 }
 
 async function main() {
+    const program = new Command();
+
+    program
+        .name(packageJson.name)
+        .description(packageJson.description)
+        .version(packageJson.version)
+        .option('-i, --input <path>', 'Path to local item IDs JSON file (defaults to fetching from GitHub)');
+
+    program.parse();
+
+    const options = program.opts<{ input?: string }>();
     const outputDir = join(__dirname, '..', '..', 'mcbe-item-ids');
 
-    await createPackage(outputDir);
+    await createPackage(outputDir, options.input);
 
     console.log('Done!');
 }
