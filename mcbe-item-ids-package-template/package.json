@@ -1,0 +1,22 @@
+{
+    "name": "mcbe-item-ids",
+    "version": "1.0.0",
+    "description": "TypeScript library template for MCBE Item IDs packages",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/JohnScience/mcbe-item-ids"
+    },
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^25.0.9",
+        "typescript": "^5.7.2"
+    }
+}

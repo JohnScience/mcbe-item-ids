@@ -1,0 +1,3 @@
+import itemIds from "../assets/item-ids.json";
+
+export { itemIds };
