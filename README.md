@@ -75,7 +75,7 @@ This template provides the base structure, configuration, and code that gets cus
 
 ## Workflow
 
-For usage (applies to most users),
+For usage (applies to most users), see <https://www.npmjs.com/package/mcbe-item-ids>.
 
 ```bash
 npm install mcbe-item-ids
