@@ -4,7 +4,7 @@ A monorepo for packages working with Minecraft Bedrock Edition item IDs, contain
 
 ## Packages
 
-### [`mcbe-item-ids`](./mcbe-item-ids)
+### `mcbe-item-ids` (generated)
 
 **Type:** Library  
 **Description:** Minecraft Bedrock Edition item IDs exported as a TypeScript/JavaScript module.
@@ -22,6 +22,8 @@ import { itemIds } from 'mcbe-item-ids';
 
 console.log(itemIds);
 ```
+
+For usage, see <https://www.npmjs.com/package/mcbe-item-ids>.
 
 ---
 
